@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus Game Studio | NEXUS PARKOUR</title>
+<meta name="description" content="Nexus Game Studio desarrolla NEXUS PARKOUR y nuevos proyectos indie en público, creciendo paso a paso hacia una gran empresa de gaming.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lustrous-beignet-35c0cc.netlify.app/">
+<meta property="og:title" content="Nexus Game Studio | NEXUS PARKOUR">
+<meta property="og:description" content="Nexus Game Studio desarrolla NEXUS PARKOUR y nuevos proyectos indie en público, creciendo paso a paso hacia una gran empresa de gaming.">
+<meta property="og:image" content="https://img.youtube.com/vi/wvYL1NiPHgA/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nexus Game Studio | NEXUS PARKOUR">
+<meta name="twitter:description" content="Nexus Game Studio desarrolla NEXUS PARKOUR y nuevos proyectos indie en público, creciendo paso a paso hacia una gran empresa de gaming.">
+<meta name="twitter:image" content="https://img.youtube.com/vi/wvYL1NiPHgA/maxresdefault.jpg">
+<link rel="canonical" href="https://lustrous-beignet-35c0cc.netlify.app/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2307060f'/%3E%3Cpath d='M16 48V16l32 32V16' fill='none' stroke='%2325f4ee' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07060f; --bg2:#0e0c1c; --line:#2a2548; --text:#e9e7f7; --muted:#9a96b8;
+  --cyan:#25f4ee; --pink:#ff2d95; --violet:#7a5cff; --mp:#009ee3;
+  --display:'Chakra Petch','Arial Narrow',Impact,sans-serif;
+  --body:'Outfit','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{background:var(--bg);color:var(--text);font:400 1.05rem/1.65 var(--body);overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.wrap{width:min(1120px,92%);margin:0 auto}
+
+/* Skip to content */
+.skip-link{position:fixed;left:-9999px;top:0;z-index:200;padding:.75rem 1.2rem;background:var(--cyan);color:#041014;
+  font:700 .95rem var(--display);text-decoration:none}
+.skip-link:focus{left:1rem;top:1rem}
+
+/* Topbar */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(7,6,15,.86);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:64px}
+.brand{font:700 1.15rem var(--display);letter-spacing:.04em;text-decoration:none;color:#fff;white-space:nowrap}
+.brand span{color:var(--cyan)}
+.nav-links{display:flex;align-items:center;gap:1.1rem;list-style:none;flex-wrap:wrap}
+.nav-links a{color:var(--muted);text-decoration:none;font:500 .88rem var(--display);letter-spacing:.02em;
+  border-bottom:1px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--cyan);border-color:var(--cyan)}
+.nav-toggle{display:none;background:transparent;border:1px solid var(--line);color:#fff;padding:.45rem .75rem;
+  font:600 .9rem var(--display);cursor:pointer;border-radius:4px}
+.nav-toggle:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* Hero */
+.hero{position:relative;min-height:calc(92vh - 64px);display:grid;align-items:center;padding:4.5rem 0 4rem;
+  background:radial-gradient(60% 50% at 80% 10%,rgba(122,92,255,.28),transparent 70%),
+             radial-gradient(50% 45% at 10% 90%,rgba(255,45,149,.2),transparent 70%),var(--bg)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent);-webkit-mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent)}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.75}
+.trail{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.trail path{fill:none;stroke:var(--cyan);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 8px var(--cyan));
+  stroke-dasharray:1800;stroke-dashoffset:1800;animation:run 2.6s .3s cubic-bezier(.6,.1,.2,1) forwards}
+@keyframes run{to{stroke-dashoffset:0}}
+.hero .wrap{position:relative;z-index:2}
+.stage-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .85rem;margin-bottom:1.1rem;
+  border:1px solid var(--cyan);background:rgba(37,244,238,.08);color:var(--cyan);
+  font:700 .8rem var(--display);letter-spacing:.06em;text-transform:uppercase}
+h1{font:700 clamp(2.8rem,9vw,6.2rem)/.95 var(--display);letter-spacing:.02em;color:#fff;
+  text-shadow:0 0 6px rgba(255,255,255,.6),0 0 24px var(--pink),0 0 60px var(--pink);animation:flick 1.4s .2s both}
+h1 span{display:block;color:var(--cyan);text-shadow:0 0 6px rgba(255,255,255,.6),0 0 24px var(--cyan),0 0 60px var(--cyan)}
+@keyframes flick{0%,18%,22%,60%{opacity:.25}20%,25%,62%,100%{opacity:1}}
+.sub{max-width:38rem;margin:1.5rem 0 2.1rem;color:var(--muted);font-size:1.18rem}
+.btns{display:flex;flex-wrap:wrap;gap:1rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.88rem 1.55rem;font:600 .98rem var(--display);
+  text-decoration:none;border:2px solid var(--pink);color:#fff;background:rgba(255,45,149,.12);cursor:pointer;
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  box-shadow:inset 0 0 18px rgba(255,45,149,.35);transition:background .2s,color .2s}
+.btn:hover{background:var(--pink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.alt{border-color:var(--cyan);background:rgba(37,244,238,.08);box-shadow:inset 0 0 18px rgba(37,244,238,.3)}
+.btn.alt:hover:not(:disabled){background:var(--cyan);color:#041014}
+.btn.violet{border-color:var(--violet);background:rgba(122,92,255,.14);box-shadow:inset 0 0 18px rgba(122,92,255,.32)}
+.btn.violet:hover:not(:disabled){background:var(--violet);color:#fff}
+.btn.mp{border-color:var(--mp);background:rgba(0,158,227,.14);box-shadow:inset 0 0 18px rgba(0,158,227,.35)}
+.btn.mp:hover{background:var(--mp);color:#fff}
+.btn.sm{padding:.5rem 1.1rem;font-size:.84rem}
+
+/* Secciones */
+section{padding:5.5rem 0}
+h2{font:700 clamp(1.9rem,4.5vw,3rem)/1.1 var(--display);margin-bottom:1.1rem}
+.lead{max-width:46rem;color:#cfcbe8}
+
+/* Catálogo de Juegos y Próximos Juegos */
+.games-catalog{background:var(--bg);border-top:1px solid var(--line)}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.1rem}
+.game-card{padding:1.6rem;border:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column;justify-content:space-between;gap:1.1rem;
+  transition:border-color .2s,transform .2s}
+.game-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.game-badge{display:inline-block;font:700 .78rem var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--cyan)}
+.game-badge.active{color:var(--pink)}
+.game-card h3{font:700 1.4rem var(--display);margin-top:.25rem}
+.game-card p{color:var(--muted);font-size:.98rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;list-style:none}
+.tags li{padding:.2rem .8rem;border:1px solid var(--violet);color:#cfc6ff;font-size:.88rem}
+
+.upcoming-section{background:var(--bg2);border-top:1px solid var(--line)}
+.dyn-toolbar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:1.4rem;padding:1rem 1.2rem;
+  border:1px solid var(--line);background:rgba(7,6,15,.75)}
+.dyn-toolbar input,.dyn-toolbar select{background:#05040b;border:1px solid var(--line);color:var(--text);
+  padding:.52rem .75rem;font:400 .9rem var(--body);border-radius:4px;min-width:165px}
+.live-ticker{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:1.2rem;padding:.85rem 1.1rem;border-left:3px solid var(--cyan);background:rgba(37,244,238,.06);font-size:.92rem}
+.live-ticker span{color:var(--muted)}
+.live-pill{display:inline-flex;align-items:center;gap:.45rem;color:var(--cyan);font:700 .78rem var(--display);
+  letter-spacing:.06em;text-transform:uppercase}
+.live-pill i{width:.5rem;height:.5rem;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 1.5s infinite}
+.upcoming-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin-top:2rem}
+.upcoming-card{padding:1.5rem;border:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;gap:1rem}
+.upcoming-stage{color:var(--violet);font:700 .78rem var(--display);letter-spacing:.05em;text-transform:uppercase}
+.upcoming-card h3{font:700 1.3rem var(--display);margin-top:.25rem}
+.upcoming-card p{color:var(--muted);font-size:.96rem}
+
+/* Ficha destacada NEXUS PARKOUR */
+.game{background:var(--bg);border-block:1px solid var(--line)}
+.game-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:start}
+.video{position:relative;aspect-ratio:16/9;background:#000;border:2px solid var(--cyan);
+  box-shadow:0 0 0 4px rgba(37,244,238,.08),0 0 40px rgba(37,244,238,.35);overflow:hidden}
+.video.vertical{aspect-ratio:9/16;width:min(100%,340px);justify-self:center}
+.video .thumb{position:absolute;inset:0;display:block}
+.video .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.video .play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border:3px solid var(--cyan);border-radius:50%;
+  background:rgba(7,6,15,.65);box-shadow:0 0 24px var(--cyan)}
+.video .play::after{content:"";position:absolute;left:30px;top:21px;border-left:24px solid #fff;border-block:17px solid transparent}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video .ph{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:.4rem;padding:1rem;
+  color:var(--muted);background:repeating-linear-gradient(135deg,#0b0a18 0 14px,#100e22 14px 28px)}
+.video .ph strong{font:700 1.2rem var(--display);color:var(--cyan)}
+.game p{color:#cfcbe8;margin-bottom:1rem}
+.status{margin-top:1.4rem;padding:1.1rem 1.2rem;border-left:4px solid var(--pink);background:rgba(255,45,149,.08)}
+.status b{display:flex;align-items:center;gap:.6rem;font:700 1.15rem var(--display);color:#fff}
+.dot{width:.7rem;height:.7rem;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.status span{color:var(--muted);font-size:.95rem}
+.dl-box{margin-top:1.5rem;padding:1.2rem 1.3rem;border:1px solid var(--line);background:rgba(7,6,15,.7)}
+.dl-note{margin-top:.75rem;color:var(--muted);font-size:.86rem}
+.dl-note code{color:var(--cyan);font-family:monospace}
+.dl-feedback{margin-top:.6rem;font-size:.86rem;color:var(--cyan);min-height:1.2em}
+
+/* Estadísticas */
+.stats-section{background:var(--bg2);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.3rem;margin-top:2.1rem}
+.stat-card{padding:1.4rem 1.5rem;border:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;gap:.45rem}
+.stat-card.highlight{border-color:var(--cyan);box-shadow:0 0 24px rgba(37,244,238,.12)}
+.stat-label{font:700 .8rem var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.stat-value{font:700 clamp(1.8rem,3.6vw,2.5rem)/1.05 var(--display);color:#fff}
+.stat-card.highlight .stat-value{color:var(--cyan)}
+.stat-sub{color:var(--muted);font-size:.88rem}
+.stat-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;margin-top:.35rem}
+.stats-legend{margin-top:1.2rem;color:var(--muted);font-size:.85rem}
+
+/* Empresa indie en crecimiento, roles y medios/prensa */
+.about{background:var(--bg)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.2rem}
+.col{padding-top:1rem;border-top:2px solid var(--violet)}
+.col:nth-child(2){border-color:var(--cyan)}
+.col:nth-child(3){border-color:var(--pink)}
+.about h3{font:700 1.25rem var(--display);margin-bottom:.4rem}
+.col p{color:var(--muted)}
+
+.roadmap-section{background:var(--bg2);border-top:1px solid var(--line)}
+.roadmap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem;margin-top:2.1rem}
+.phase-card{padding:1.5rem;border:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;gap:.55rem}
+.phase-tag{font:700 .78rem var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--cyan)}
+.phase-card h3{font:700 1.25rem var(--display)}
+.phase-card p{color:var(--muted);font-size:.95rem}
+
+.media-section{background:var(--bg);border-top:1px solid var(--line)}
+.media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin-top:2.1rem}
+.media-card{padding:1.5rem;border:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column;justify-content:space-between;gap:1rem}
+.media-card h3{font:700 1.25rem var(--display)}
+.media-card p{color:var(--muted);font-size:.95rem}
+.press-kit{margin-top:2rem;padding:1.4rem 1.5rem;border:1px solid var(--line);background:var(--bg2)}
+.press-kit h3{font:700 1.2rem var(--display);margin-bottom:.5rem;color:var(--cyan)}
+.press-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem;margin-top:.8rem;color:#cfcbe8;font-size:.93rem}
+.press-list strong{color:#fff}
+
+.community{margin-top:2.4rem}
+.community h3{font:700 1.25rem var(--display);margin-bottom:1rem}
+.mail-row{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:1.4rem;color:var(--muted)}
+.mail-row a{color:var(--cyan);text-decoration:none;border-bottom:1px solid transparent}
+.mail-row a:hover{border-color:var(--cyan)}
+.copy-status{font-size:.85rem;color:var(--cyan);min-height:1.2em}
+
+/* Pasarela Mercado Pago (opcional) */
+.support{background:var(--bg2);border-top:1px solid var(--line)}
+.support .btns{margin-top:1.8rem}
+.mp-badge{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.4rem;color:var(--muted);font-size:.88rem}
+.mp-dot{width:.55rem;height:.55rem;border-radius:50%;background:var(--mp);box-shadow:0 0 8px var(--mp)}
+
+footer{border-top:1px solid var(--line);padding:3rem 0;background:var(--bg2)}
+.foot{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:center}
+.foot strong{font:700 1.3rem var(--display)}
+.foot nav{display:flex;flex-wrap:wrap;gap:1.2rem 1.5rem;align-items:center}
+.foot nav a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+.foot nav a:hover{color:var(--cyan);border-color:var(--cyan)}
+.foot-contact{display:inline-flex;flex-wrap:wrap;align-items:center;gap:.65rem;color:var(--muted)}
+.foot-contact a[data-mail]{color:var(--cyan)}
+.copy{margin-top:1.6rem;color:var(--muted);font-size:.85rem}
+
+.mod-panel{margin-top:2rem;padding:1.4rem;border:1px solid var(--violet);background:rgba(14,12,28,.92)}
+.mod-panel h3{font:700 1.25rem var(--display);color:var(--cyan);margin-bottom:.4rem}
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem;margin-top:1rem}
+.mod-field{display:flex;flex-direction:column;gap:.3rem}
+.mod-field label{font-size:.82rem;color:var(--muted)}
+.mod-field input,.mod-field select,.card-edit-input{background:#05040b;border:1px solid var(--line);color:var(--text);
+  padding:.48rem .68rem;font:400 .88rem var(--body);border-radius:4px;width:100%}
+.card-edit-box{display:none;flex-direction:column;gap:.55rem;margin-top:.6rem;padding:.75rem;
+  border:1px dashed var(--line);background:rgba(7,6,15,.8)}
+.card-edit-box.open{display:flex}
+
+/* Formulario especial para visitantes: sugerencias de videojuegos y futuro del estudio */
+.survey-section{background:var(--bg);border-top:1px solid var(--line)}
+.survey-card{margin-top:2.1rem;padding:1.75rem;border:1px solid var(--line);background:var(--bg2)}
+.survey-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.survey-field{display:flex;flex-direction:column;gap:.4rem;margin-top:.85rem}
+.survey-grid .survey-field{margin-top:0}
+.survey-field label,.survey-group-title{font:600 .9rem var(--display);color:var(--text)}
+.survey-field input,.survey-field select,.survey-field textarea{background:#05040b;border:1px solid var(--line);
+  color:var(--text);padding:.6rem .78rem;font:400 .94rem var(--body);border-radius:4px;width:100%}
+.survey-field textarea{min-height:92px;resize:vertical}
+.survey-checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.55rem .9rem;margin-top:.55rem}
+.survey-check{display:flex;align-items:center;gap:.5rem;font-size:.92rem;color:#cfcbe8;cursor:pointer}
+.survey-check input{accent-color:var(--cyan);width:16px;height:16px}
+.survey-status{margin-top:.9rem;font-size:.9rem;color:var(--cyan);min-height:1.3em}
+.responses-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.5rem}
+.response-item{padding:1.1rem 1.2rem;border:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;gap:.45rem}
+.response-head{display:flex;justify-content:space-between;gap:.5rem;font-size:.82rem;color:var(--muted)}
+.response-tag{color:var(--pink);font:700 .76rem var(--display);text-transform:uppercase;letter-spacing:.05em}
+.response-body{color:#cfcbe8;font-size:.92rem}
+.response-meta{color:var(--muted);font-size:.82rem}
+
+@media(max-width:820px){
+  .game-grid,.cols{grid-template-columns:1fr}
+  .hero{min-height:auto}
+  section{padding:4rem 0}
+  .nav-toggle{display:inline-flex;align-items:center;gap:.4rem}
+  .nav-links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;
+    gap:0;background:var(--bg2);border-bottom:1px solid var(--line)}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:.9rem 4%;border-bottom:1px solid rgba(42,37,72,.55)}
+  .foot-contact{width:100%;margin-top:.25rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .trail path{stroke-dashoffset:0}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#">NEXUS<span>GAME STUDIO</span></a>
+    <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menú</button>
+    <nav aria-label="Navegación principal">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#juegos">Juegos</a></li>
+        <li><a href="#proximos-juegos">Próximos Juegos</a></li>
+        <li><a href="#nexus-parkour">NEXUS PARKOUR</a></li>
+        <li><a href="#estadisticas">Estadísticas</a></li>
+        <li><a href="#crecimiento">Crecimiento</a></li>
+        <li><a href="#medios">Medios</a></li>
+        <li><a href="#sugerencias">Sugerencias</a></li>
+        <li><a href="#estudio">Estudio</a></li>
+        <li><a id="nav-mp-link" href="#apoyar" hidden>Apoyar</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" aria-label="Portada">
+  <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+  <svg class="trail" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-20 620 L260 620 L260 470 L520 470 L520 560 L760 560 L760 330 L980 330 L980 220 L1220 220"/>
+  </svg>
+  <div class="wrap">
+    <span class="stage-pill">Estudio Indie · En Crecimiento</span>
+    <h1>NEXUS<span>GAME STUDIO</span></h1>
+    <p class="sub">Estudio de videojuegos independiente creando NEXUS PARKOUR y nuevos proyectos en público, construyendo equipo, comunidad y medios paso a paso.</p>
+    <div class="btns">
+      <a class="btn" href="#juegos">Explorar Juegos</a>
+      <a class="btn alt" href="#proximos-juegos">Próximos Juegos</a>
+      <a class="btn violet" href="#sugerencias">Opinar sobre Juegos</a>
+      <a class="btn alt" id="itch-btn" href="https://thenexusgamestudio.itch.io/" target="_blank" rel="noopener">itch.io</a>
+    </div>
+  </div>
+</section>
+
+<main id="main-content">
+<section class="games-catalog" id="juegos">
+  <div class="wrap">
+    <h2>Juegos del Estudio</h2>
+    <p class="lead">Catálogo activo de juegos publicados o en desarrollo. Se actualiza automáticamente a medida que sumás títulos desde Próximos Juegos.</p>
+    <div class="games-grid" id="active-games-grid"></div>
+  </div>
+</section>
+
+<section class="upcoming-section" id="proximos-juegos">
+  <div class="wrap">
+    <h2>Próximos Juegos</h2>
+    <p class="lead">Pipeline de futuros lanzamientos y prototipos. Agregá nuevos títulos o pulsá <strong>Sumar a Juegos</strong> para moverlos al catálogo principal.</p>
+    <form class="dyn-toolbar" id="add-game-form" aria-label="Agregar juego o próximo proyecto">
+      <input type="text" id="new-game-title" placeholder="Nombre del juego (ej. NEXUS DASH)" required>
+      <input type="text" id="new-game-summary" placeholder="Descripción breve..." required>
+      <select id="new-game-status" aria-label="Estado inicial">
+        <option value="upcoming">Próximo Juego</option>
+        <option value="released">Sumar directo a Juegos</option>
+      </select>
+      <button class="btn alt sm" type="submit">+ Agregar</button>
+      <button class="btn violet sm" type="button" id="reset-dynamic-btn">Restablecer</button>
+    </form>
+    <div class="live-ticker" id="activity-ticker" role="status" aria-live="polite">
+      <span class="live-pill"><i></i>Actividad en vivo</span>
+      <span id="activity-text">Sistema listo · Catálogo, próximos juegos y estadísticas activas.</span>
+    </div>
+    <div class="upcoming-list" id="upcoming-games-grid"></div>
+  </div>
+</section>
+
+<section class="game" id="nexus-parkour">
+  <div class="wrap game-grid">
+    <div class="video" id="video-box">
+      <div class="ph"><strong>Tu video va aquí</strong><span>Pega el ID del video de YouTube en la variable VIDEO_ID</span></div>
+    </div>
+    <div>
+      <h2>NEXUS PARKOUR</h2>
+      <p>Juego de acción y parkour desarrollado en Unreal Engine 5. Corre por paredes, encadena saltos y domina el movimiento en ciudades oscuras iluminadas por neón.</p>
+      <p>Cada mecánica, mapa y error se muestra durante el desarrollo para que la comunidad siga la evolución real del estudio.</p>
+      <ul class="tags"><li>Acción</li><li>Parkour</li><li>Unreal Engine 5</li><li>Build in Public</li></ul>
+      <div class="status">
+        <b><i class="dot"></i>Temporada 2 en desarrollo</b>
+        <span>Nuevos mapas, movimientos y mejoras en cada avance publicado.</span>
+      </div>
+      <div class="dl-box" id="descargar">
+        <div class="btns">
+          <a class="btn alt" id="direct-dl-btn" data-exe-download href="./NEXUSPARCUKOR.exe" download="NEXUSPARCUKOR.exe">Descargar NEXUSPARCUKOR.exe</a>
+        </div>
+        <p class="dl-note">Ejecutable: <code>NEXUSPARCUKOR.exe</code> · Windows 10/11 (64-bit). Para distribución de paquete completo con carpetas de UE5, usá instalador o archivo comprimido del build.</p>
+        <p class="dl-feedback" id="dl-feedback" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section" id="estadisticas">
+  <div class="wrap">
+    <h2>Estadísticas de la Página y Comunidad</h2>
+    <p class="lead">Seguimiento de vistas de la página y personas sumadas o restadas en cada red de la comunidad.</p>
+    <div class="stats-grid" id="stats-grid"></div>
+    <p class="stats-legend" id="stats-legend"></p>
+  </div>
+</section>
+
+<section class="roadmap-section" id="crecimiento">
+  <div class="wrap">
+    <h2>Plan de Crecimiento del Estudio</h2>
+    <p class="lead">Empezamos como proyecto independiente con visión de empresa escalable: consolidar juegos jugables, sumar colaboradores y expandir nuestros canales de difusión.</p>
+    <div class="roadmap-grid">
+      <article class="phase-card">
+        <span class="phase-tag">Etapa 01 · Actual</span>
+        <h3>Base Indie &amp; Build in Public</h3>
+        <p>Desarrollo continuo de NEXUS PARKOUR, publicación de avances en video, feedback directo de jugadores y base web centralizada.</p>
+      </article>
+      <article class="phase-card">
+        <span class="phase-tag">Etapa 02 · Equipo</span>
+        <h3>Suma de Colaboradores y Roles</h3>
+        <p>Incorporación gradual de desarrolladores, level designers, artistas 3D, animadores, audio y testers a medida que crecen los proyectos.</p>
+      </article>
+      <article class="phase-card">
+        <span class="phase-tag">Etapa 03 · Catálogo &amp; Medios</span>
+        <h3>Múltiples Títulos y Red de Medios</h3>
+        <p>Expansión del catálogo con nuevos juegos y transmisiones, devlogs, clips, comunidad activa y cobertura con creadores y prensa.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="media-section" id="medios">
+  <div class="wrap">
+    <h2>Medios de Comunicación, Redes y Prensa</h2>
+    <p class="lead">Canales oficiales para seguir devlogs, trailers, shorts, comunidad y contacto editorial o de creadores.</p>
+    <div class="media-grid">
+      <article class="media-card">
+        <div>
+          <h3>YouTube · Devlogs y Trailers</h3>
+          <p>Avances semanales, gameplays, shorts y detrás de escena del desarrollo en Unreal Engine.</p>
+        </div>
+        <div class="btns">
+          <a class="btn sm" href="https://www.youtube.com/@NEXUS-GAMES-STUDIO" target="_blank" rel="noopener">Abrir YouTube</a>
+        </div>
+      </article>
+
+      <article class="media-card">
+        <div>
+          <h3>Discord · Comunidad y Testing</h3>
+          <p>Canal directo para reportes de bugs, ideas de jugabilidad, pruebas de builds y formación de comunidad.</p>
+        </div>
+        <div class="btns">
+          <a class="btn violet sm" data-discord href="#" target="_blank" rel="noopener">Entrar a Discord</a>
+        </div>
+      </article>
+
+      <article class="media-card">
+        <div>
+          <h3>Instagram &amp; itch.io · Clips y Builds</h3>
+          <p>Clips rápidos, arte y novedades en Instagram, más páginas de proyecto y builds en itch.io.</p>
+        </div>
+        <div class="btns">
+          <a class="btn alt sm" data-instagram href="#" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn violet sm" href="https://thenexusgamestudio.itch.io/" target="_blank" rel="noopener">itch.io</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="press-kit">
+      <h3>Datos para Medios, Creadores de Contenido y Colaboraciones</h3>
+      <p class="lead">Información institucional y de contacto directo para notas, reseñas, cobertura, alianzas y postulaciones al equipo.</p>
+      <ul class="press-list">
+        <li><strong>Estudio:</strong> Nexus Game Studio</li>
+        <li><strong>Proyecto insignia:</strong> NEXUS PARKOUR (Unreal Engine 5)</li>
+        <li><strong>Correo oficial:</strong> <a data-mail href="mailto:thenexus.gamestudio@gmail.com">thenexus.gamestudio@gmail.com</a></li>
+        <li><strong>Sitio web:</strong> <a href="https://lustrous-beignet-35c0cc.netlify.app/">lustrous-beignet-35c0cc.netlify.app</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="survey-section" id="sugerencias">
+  <div class="wrap">
+    <h2>Tu Voz en el Estudio · Formulario de Jugadores</h2>
+    <p class="lead">Contanos qué te gustaría que haga Nexus Game Studio en videojuegos, mecánicas, modos, contenido y futuro del estudio.</p>
+
+    <div class="survey-card">
+      <form id="player-survey-form">
+        <div class="survey-grid">
+          <div class="survey-field">
+            <label for="sv-nick">Apodo o nombre (opcional)</label>
+            <input type="text" id="sv-nick" placeholder="Ej. RunnerX o anónimo">
+          </div>
+          <div class="survey-field">
+            <label for="sv-genre">¿Qué tipo de juego o enfoque te gustaría que hagamos a continuación?</label>
+            <select id="sv-genre">
+              <option value="Parkour / Velocidad / Contrarreloj">Parkour / Velocidad / Contrarreloj</option>
+              <option value="Acción / Combate / Habilidades">Acción / Combate / Habilidades</option>
+              <option value="Multijugador / Cooperativo / Ranked">Multijugador / Cooperativo / Ranked</option>
+              <option value="Mundo abierto / Exploración vertical">Mundo abierto / Exploración vertical</option>
+              <option value="Terror / Supervivencia / Thriller">Terror / Supervivencia / Thriller</option>
+              <option value="Otro estilo experimental">Otro estilo experimental</option>
+            </select>
+          </div>
+          <div class="survey-field">
+            <label for="sv-priority">¿Qué debería priorizar el estudio primero?</label>
+            <select id="sv-priority">
+              <option value="Más mapas y niveles">Más mapas y niveles</option>
+              <option value="Nuevas mecánicas de movimiento">Nuevas mecánicas de movimiento</option>
+              <option value="Rendimiento y optimización (FPS)">Rendimiento y optimización (FPS)</option>
+              <option value="Multijugador / tablas de tiempos">Multijugador / tablas de tiempos</option>
+              <option value="Historia, estética y sonido">Historia, estética y sonido</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="survey-field">
+          <span class="survey-group-title">¿Qué otras cosas parecidas te gustaría que haga la empresa?</span>
+          <div class="survey-checks" id="sv-extras">
+            <label class="survey-check"><input type="checkbox" value="Devlogs y detrás de escena"> Devlogs y detrás de escena</label>
+            <label class="survey-check"><input type="checkbox" value="Betas abiertas y pruebas con comunidad"> Betas abiertas y pruebas con comunidad</label>
+            <label class="survey-check"><input type="checkbox" value="Editor de niveles o mods"> Editor de niveles o mods</label>
+            <label class="survey-check"><input type="checkbox" value="Skins, personalización y cosméticos"> Skins, personalización y cosméticos</label>
+            <label class="survey-check"><input type="checkbox" value="Torneos o desafíos de speedrun"> Torneos o desafíos de speedrun</label>
+            <label class="survey-check"><input type="checkbox" value="Banda sonora original y arte"> Banda sonora original y arte</label>
+          </div>
+        </div>
+
+        <div class="survey-field">
+          <label for="sv-idea">¿Qué idea, mecánica, modo o juego te gustaría ver en futuros lanzamientos?</label>
+          <textarea id="sv-idea" placeholder="Ej. Me gustaría un modo contrarreloj con fantasmas de otros jugadores, wall-kick más alto o un segundo juego de acción..." required></textarea>
+        </div>
+
+        <div class="btns" style="margin-top:1.1rem">
+          <button class="btn alt" type="submit">Enviar sugerencia</button>
+          <button class="btn violet sm" type="button" id="sv-copy-btn">Copiar respuestas guardadas</button>
+          <button class="btn sm" type="button" id="sv-clear-btn">Borrar respuestas locales</button>
+        </div>
+        <p class="survey-status" id="sv-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div id="sv-responses-wrap" hidden>
+        <h3 style="font:700 1.15rem var(--display);margin-top:1.4rem;color:var(--cyan)">Sugerencias enviadas en este navegador</h3>
+        <div class="responses-list" id="sv-responses-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="estudio">
+  <div class="wrap">
+    <h2>Sobre Nexus Game Studio</h2>
+    <p class="lead">Nexus Game Studio nace independiente y crece en público. Compartimos el proceso real de construir videojuegos y escalar un estudio paso a paso.</p>
+    <div class="cols">
+      <div class="col"><h3>Desarrollo abierto</h3><p>Avances, pruebas y decisiones de diseño publicados mientras se construyen.</p></div>
+      <div class="col"><h3>Comunidad primero</h3><p>El feedback de los jugadores guía controles, ritmo y contenido de cada temporada.</p></div>
+      <div class="col"><h3>Crecimiento sostenido</h3><p>Cada versión y cada nuevo integrante suman capacidad para escalar hacia una gran empresa.</p></div>
+    </div>
+    <div class="mod-panel" id="studio-config-panel">
+      <h3>Panel Modificable del Estudio y Enlaces</h3>
+      <p class="lead">Editá cualquier dato o enlace desde acá y guardalo en este navegador (o descargá un JSON de respaldo).</p>
+      <form id="studio-config-form">
+        <div class="mod-grid">
+          <div class="mod-field">
+            <label for="cfg-studio-name">Nombre del estudio</label>
+            <input type="text" id="cfg-studio-name">
+          </div>
+          <div class="mod-field">
+            <label for="cfg-exe-url">URL / ruta de descarga (.exe)</label>
+            <input type="text" id="cfg-exe-url">
+          </div>
+          <div class="mod-field">
+            <label for="cfg-discord-url">Link de Discord</label>
+            <input type="text" id="cfg-discord-url">
+          </div>
+          <div class="mod-field">
+            <label for="cfg-instagram-url">Link de Instagram</label>
+            <input type="text" id="cfg-instagram-url">
+          </div>
+          <div class="mod-field">
+            <label for="cfg-youtube-url">Link de YouTube</label>
+            <input type="text" id="cfg-youtube-url">
+          </div>
+          <div class="mod-field">
+            <label for="cfg-itch-url">Link de itch.io</label>
+            <input type="text" id="cfg-itch-url">
+          </div>
+          <div class="mod-field">
+            <label for="cfg-email">Correo de contacto</label>
+            <input type="email" id="cfg-email">
+          </div>
+          <div class="mod-field">
+            <label for="cfg-mp-url">Link de Mercado Pago</label>
+            <input type="text" id="cfg-mp-url">
+          </div>
+        </div>
+        <div class="btns" style="margin-top:1.1rem">
+          <button class="btn alt sm" type="submit">Guardar cambios</button>
+          <button class="btn violet sm" type="button" id="export-state-btn">Exportar JSON</button>
+          <button class="btn sm" type="button" id="reset-all-btn">Restablecer todo</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="community" id="comunidad">
+      <h3>Canales y Contacto Directo</h3>
+      <div class="btns">
+        <a class="btn violet" data-discord href="#" target="_blank" rel="noopener">Discord</a>
+        <a class="btn alt" data-instagram href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn sm" href="https://www.youtube.com/@NEXUS-GAMES-STUDIO" target="_blank" rel="noopener">YouTube</a>
+      </div>
+      <div class="mail-row">
+        <span>Contacto / Prensa / Equipo: <a data-mail href="mailto:thenexus.gamestudio@gmail.com">thenexus.gamestudio@gmail.com</a></span>
+        <button class="btn alt sm" type="button" data-copy-mail>Copiar correo</button>
+        <span class="copy-status" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="support" id="apoyar" hidden>
+  <div class="wrap">
+    <h2>Apoya el Desarrollo <span style="color:var(--muted);font-size:.55em;font-weight:500">(Opcional)</span></h2>
+    <p class="lead">Nuestros proyectos se comparten de forma abierta. Si querés impulsar nuevas temporadas, herramientas y el crecimiento del estudio, podés colaborar de forma opcional por Mercado Pago.</p>
+    <div class="btns">
+      <a class="btn mp" id="mp-link" href="https://link.mercadopago.com.ar/joaquinscoccimarro" target="_blank" rel="noopener">Apoyar con Mercado Pago</a>
+    </div>
+    <p class="mp-badge"><i class="mp-dot"></i>Pagos procesados de forma segura a través de Mercado Pago (tarjetas, dinero en cuenta y transferencia).</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <strong>Nexus Game Studio</strong>
+      <nav aria-label="Enlaces del estudio">
+        <a href="#juegos">Juegos</a>
+        <a href="#proximos-juegos">Próximos Juegos</a>
+        <a href="#estadisticas">Estadísticas</a>
+        <a href="#crecimiento">Crecimiento</a>
+        <a href="#medios">Medios</a>
+        <a href="#sugerencias">Sugerencias</a>
+        <a href="https://www.youtube.com/@NEXUS-GAMES-STUDIO" target="_blank" rel="noopener">YouTube</a>
+        <a id="itch-foot" href="https://thenexusgamestudio.itch.io/" target="_blank" rel="noopener">itch.io</a>
+        <a data-discord href="#" target="_blank" rel="noopener">Discord</a>
+        <a data-instagram href="#" target="_blank" rel="noopener">Instagram</a>
+        <a id="mp-foot-link" href="#apoyar" hidden>Apoyar (Mercado Pago)</a>
+        <span class="foot-contact">
+          <span>Contacto:</span>
+          <a data-mail href="mailto:thenexus.gamestudio@gmail.com">thenexus.gamestudio@gmail.com</a>
+          <button class="btn alt sm" type="button" data-copy-mail>Copiar correo</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </span>
+      </nav>
+    </div>
+    <p class="copy">© <span id="year"></span> Nexus Game Studio (thenexusgamestudio). Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+/* ===== CONFIGURACIÓN PRINCIPAL: edita solo estas líneas ===== */
+const STUDIO_NAME = "Nexus Game Studio";
+const SITE_URL    = "https://lustrous-beignet-35c0cc.netlify.app/";
+const EXE_FILENAME = "NEXUSPARCUKOR.exe";
+const EXE_URL   = "./NEXUSPARCUKOR.exe";
+const ITCH_URL  = "https://thenexusgamestudio.itch.io/";
+const VIDEO_ID  = "wvYL1NiPHgA";
+const VIDEO_VERTICAL = true;
+const EMAIL     = "thenexus.gamestudio@gmail.com";
+const DISCORD_URL = "https://discord.gg/tu-invitacion";
+const INSTAGRAM_URL = "https://www.instagram.com/thenexus.gamestudio/";
+const YOUTUBE_URL = "https://www.youtube.com/@NEXUS-GAMES-STUDIO";
+
+/* ===== CATÁLOGO DE JUEGOS Y PRÓXIMOS JUEGOS ===== */
+const INITIAL_GAMES = [
+  {
+    id: "nexus-parkour",
+    title: "NEXUS PARKOUR",
+    badge: "En desarrollo · Temporada 2",
+    stage: "Jugable / Build in Public",
+    summary: "Acción y parkour en Unreal Engine con carreras por paredes, saltos encadenados y ciudades oscuras iluminadas por neón.",
+    tags: ["Acción", "Parkour", "Unreal Engine 5", "Build in Public"],
+    ctaHref: "#nexus-parkour",
+    ctaLabel: "Ver ficha y descarga",
+    released: true
+  },
+  {
+    id: "neon-wallrun-prototype",
+    title: "NEXUS: WALLRUN LABS",
+    badge: "Próximamente",
+    stage: "Prototipo",
+    summary: "Pistas contrarreloj enfocadas en mecánicas experimentales de impulso, gancho y precisión.",
+    tags: ["Prototipo", "Contrarreloj", "Unreal Engine 5"],
+    ctaHref: "#proximos-juegos",
+    ctaLabel: "En desarrollo",
+    released: false
+  },
+  {
+    id: "cyber-district-09",
+    title: "SECTOR 09",
+    badge: "Próximamente",
+    stage: "Preproducción",
+    summary: "Nuevo distrito vertical con rutas alternativas y desafíos de comunidad para futuras temporadas.",
+    tags: ["Exploración", "Parkour", "Build in Public"],
+    ctaHref: "#proximos-juegos",
+    ctaLabel: "Próximamente",
+    released: false
+  }
+];
+
+/* ===== ESTADÍSTICAS INICIALES (VISTAS DE PÁGINA Y COMUNIDAD POR RED) ===== */
+const INITIAL_STATS = {
+  pageViews: 0,
+  uniqueSessions: 0,
+  networks: [
+    { id: "discord",   name: "Discord",   members: 0, url: DISCORD_URL,   note: "Miembros en el servidor" },
+    { id: "youtube",   name: "YouTube",   members: 0, url: YOUTUBE_URL,   note: "Suscriptores del canal" },
+    { id: "instagram", name: "Instagram", members: 0, url: INSTAGRAM_URL, note: "Seguidores de la cuenta" },
+    { id: "itchio",    name: "itch.io",   members: 0, url: ITCH_URL,      note: "Seguidores / descargas" }
+  ]
+};
+
+/* ===== MERCADO PAGO (OPCIONAL) ===== */
+const MP_ENABLED = true;
+const MP_URL = "https://link.mercadopago.com.ar/joaquinscoccimarro";
+/* ================================================== */
+
+(function () {
+  var STORAGE_GAMES_KEY = "ngs_games_state_v1";
+  var STORAGE_CUSTOM_GAMES = "ngs_custom_games_v1";
+  var STORAGE_STATS_KEY = "ngs_stats_state_v1";
+  var STORAGE_SESSION_KEY = "ngs_session_counted_v1";
+  var STORAGE_CONFIG_KEY = "ngs_studio_config_v1";
+  var STORAGE_EDITS_KEY = "ngs_game_edits_v1";
+  var STORAGE_SURVEY_KEY = "ngs_player_suggestions_v1";
+
+  // Menú móvil
+  var navToggle = document.getElementById("nav-toggle");
+  var navLinks = document.getElementById("nav-links");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", function () {
+      var expanded = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!expanded));
+      navLinks.classList.toggle("open", !expanded);
+    });
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navToggle.setAttribute("aria-expanded", "false");
+        navLinks.classList.remove("open");
+      });
+    });
+  }
+
+  var activityEl = document.getElementById("activity-text");
+  function pushActivity(msg) {
+    if (activityEl) activityEl.textContent = msg;
+  }
+
+  function loadGameEdits() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_EDITS_KEY) || "{}") || {}; } catch (e) { return {}; }
+  }
+
+  function saveGameEdit(id, patch) {
+    var edits = loadGameEdits();
+    edits[id] = Object.assign({}, edits[id] || {}, patch);
+    try { localStorage.setItem(STORAGE_EDITS_KEY, JSON.stringify(edits)); } catch (e) {}
+  }
+
+  function loadGamesState() {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_GAMES_KEY) || "{}") || {}; } catch (e) { saved = {}; }
+    var edits = loadGameEdits();
+    var base = INITIAL_GAMES.map(function (g) {
+      var copy = Object.assign({}, g, { tags: (g.tags || []).slice() });
+      if (Object.prototype.hasOwnProperty.call(saved, g.id)) {
+        copy.released = Boolean(saved[g.id]);
+      }
+      if (edits[g.id]) {
+        copy = Object.assign(copy, edits[g.id]);
+      }
+      return copy;
+    });
+    var custom = [];
+    try { custom = JSON.parse(localStorage.getItem(STORAGE_CUSTOM_GAMES) || "[]") || []; } catch (e) { custom = []; }
+    if (!Array.isArray(custom)) custom = [];
+    var mergedCustom = custom.map(function (cg) {
+      var item = Object.assign({}, cg, { tags: (cg.tags || ["Indie", "Build in Public"]).slice() });
+      if (Object.prototype.hasOwnProperty.call(saved, item.id)) {
+        item.released = Boolean(saved[item.id]);
+      }
+      if (edits[item.id]) {
+        item = Object.assign(item, edits[item.id]);
+      }
+      return item;
+    });
+    return base.concat(mergedCustom);
+  }
+
+  function saveGameReleased(id, released) {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_GAMES_KEY) || "{}") || {}; } catch (e) { saved = {}; }
+    saved[id] = Boolean(released);
+    try { localStorage.setItem(STORAGE_GAMES_KEY, JSON.stringify(saved)); } catch (e) {}
+  }
+
+  function renderGamesSections() {
+    var games = loadGamesState();
+    var activeGrid = document.getElementById("active-games-grid");
+    var upcomingGrid = document.getElementById("upcoming-games-grid");
+    if (!activeGrid || !upcomingGrid) return;
+
+    var releasedList = games.filter(function (g) { return g.released; });
+    var upcomingList = games.filter(function (g) { return !g.released; });
+
+    activeGrid.replaceChildren();
+    releasedList.forEach(function (g) {
+      var article = document.createElement("article");
+      article.className = "game-card";
+
+      var top = document.createElement("div");
+      var badge = document.createElement("span");
+      badge.className = "game-badge active";
+      badge.textContent = g.badge || "Activo";
+
+      var h3 = document.createElement("h3");
+      h3.textContent = g.title;
+
+      var p = document.createElement("p");
+      p.textContent = g.summary;
+
+      var ul = document.createElement("ul");
+      ul.className = "tags";
+      (g.tags || []).forEach(function (t) {
+        var li = document.createElement("li");
+        li.textContent = t;
+        ul.appendChild(li);
+      });
+
+      top.appendChild(badge);
+      top.appendChild(h3);
+      top.appendChild(p);
+      top.appendChild(ul);
+
+      var actions = document.createElement("div");
+      actions.className = "btns";
+
+      var mainLink = document.createElement("a");
+      mainLink.className = "btn alt";
+      mainLink.href = g.ctaHref || "#nexus-parkour";
+      mainLink.textContent = g.ctaLabel || "Ver juego";
+      actions.appendChild(mainLink);
+
+      if (g.id !== "nexus-parkour") {
+        var demoteBtn = document.createElement("button");
+        demoteBtn.type = "button";
+        demoteBtn.className = "btn violet sm";
+        demoteBtn.textContent = "Mover a Próximos";
+        demoteBtn.addEventListener("click", function () {
+          saveGameReleased(g.id, false);
+          renderGamesSections();
+          pushActivity("'" + g.title + "' movido a Próximos Juegos.");
+        });
+        actions.appendChild(demoteBtn);
+      }
+
+      var editBox = document.createElement("div");
+      editBox.className = "card-edit-box";
+      editBox.innerHTML =
+        '<input type="text" class="card-edit-input" data-f="title" value="' + g.title.replace(/"/g, "&quot;") + '" placeholder="Título">' +
+        '<input type="text" class="card-edit-input" data-f="summary" value="' + g.summary.replace(/"/g, "&quot;") + '" placeholder="Descripción">' +
+        '<input type="text" class="card-edit-input" data-f="badge" value="' + (g.badge || "").replace(/"/g, "&quot;") + '" placeholder="Etiqueta">' +
+        '<button type="button" class="btn alt sm" data-save-card>Guardar tarjeta</button>';
+
+      var editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.className = "btn sm";
+      editBtn.textContent = "Editar";
+      editBtn.addEventListener("click", function () {
+        editBox.classList.toggle("open");
+      });
+
+      editBox.querySelector("[data-save-card]").addEventListener("click", function () {
+        var tVal = editBox.querySelector('[data-f="title"]').value.trim();
+        var sVal = editBox.querySelector('[data-f="summary"]').value.trim();
+        var bVal = editBox.querySelector('[data-f="badge"]').value.trim();
+        saveGameEdit(g.id, {
+          title: tVal || g.title,
+          summary: sVal || g.summary,
+          badge: bVal || g.badge
+        });
+        renderGamesSections();
+        pushActivity("Tarjeta '" + (tVal || g.title) + "' actualizada.");
+      });
+
+      actions.appendChild(editBtn);
+      article.appendChild(top);
+      article.appendChild(actions);
+      article.appendChild(editBox);
+      activeGrid.appendChild(article);
+    });
+
+    upcomingGrid.replaceChildren();
+    if (upcomingList.length === 0) {
+      var emptyCard = document.createElement("article");
+      emptyCard.className = "upcoming-card";
+      var emptyP = document.createElement("p");
+      emptyP.textContent = "Todos los proyectos configurados ya forman parte de Juegos del Estudio.";
+      emptyCard.appendChild(emptyP);
+      upcomingGrid.appendChild(emptyCard);
+    } else {
+      upcomingList.forEach(function (g) {
+        var card = document.createElement("article");
+        card.className = "upcoming-card";
+
+        var top = document.createElement("div");
+        var stage = document.createElement("span");
+        stage.className = "upcoming-stage";
+        stage.textContent = g.stage || "Próximamente";
+
+        var h3 = document.createElement("h3");
+        h3.textContent = g.title;
+
+        var p = document.createElement("p");
+        p.textContent = g.summary;
+
+        var ul = document.createElement("ul");
+        ul.className = "tags";
+        (g.tags || []).forEach(function (t) {
+          var li = document.createElement("li");
+          li.textContent = t;
+          ul.appendChild(li);
+        });
+
+        top.appendChild(stage);
+        top.appendChild(h3);
+        top.appendChild(p);
+        top.appendChild(ul);
+
+        var btns = document.createElement("div");
+        btns.className = "btns";
+
+        var promoteBtn = document.createElement("button");
+        promoteBtn.type = "button";
+        promoteBtn.className = "btn alt sm";
+        promoteBtn.textContent = "Sumar a Juegos";
+        promoteBtn.addEventListener("click", function () {
+          saveGameReleased(g.id, true);
+          renderGamesSections();
+          pushActivity("'" + g.title + "' sumado al apartado de Juegos.");
+        });
+
+        var editBox = document.createElement("div");
+        editBox.className = "card-edit-box";
+        editBox.innerHTML =
+          '<input type="text" class="card-edit-input" data-f="title" value="' + g.title.replace(/"/g, "&quot;") + '" placeholder="Título">' +
+          '<input type="text" class="card-edit-input" data-f="summary" value="' + g.summary.replace(/"/g, "&quot;") + '" placeholder="Descripción">' +
+          '<input type="text" class="card-edit-input" data-f="stage" value="' + (g.stage || "").replace(/"/g, "&quot;") + '" placeholder="Etapa">' +
+          '<button type="button" class="btn alt sm" data-save-card>Guardar tarjeta</button>';
+
+        var editBtn = document.createElement("button");
+        editBtn.type = "button";
+        editBtn.className = "btn sm";
+        editBtn.textContent = "Editar";
+        editBtn.addEventListener("click", function () {
+          editBox.classList.toggle("open");
+        });
+
+        editBox.querySelector("[data-save-card]").addEventListener("click", function () {
+          var tVal = editBox.querySelector('[data-f="title"]').value.trim();
+          var sVal = editBox.querySelector('[data-f="summary"]').value.trim();
+          var stVal = editBox.querySelector('[data-f="stage"]').value.trim();
+          saveGameEdit(g.id, {
+            title: tVal || g.title,
+            summary: sVal || g.summary,
+            stage: stVal || g.stage
+          });
+          renderGamesSections();
+          pushActivity("Tarjeta '" + (tVal || g.title) + "' actualizada.");
+        });
+
+        btns.appendChild(promoteBtn);
+        btns.appendChild(editBtn);
+        card.appendChild(top);
+        card.appendChild(btns);
+        card.appendChild(editBox);
+        upcomingGrid.appendChild(card);
+      });
+    }
+  }
+
+  renderGamesSections();
+
+  var addForm = document.getElementById("add-game-form");
+  if (addForm) {
+    addForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var titleInput = document.getElementById("new-game-title");
+      var summaryInput = document.getElementById("new-game-summary");
+      var statusSelect = document.getElementById("new-game-status");
+      var title = (titleInput && titleInput.value || "").trim();
+      var summary = (summaryInput && summaryInput.value || "").trim();
+      var isReleased = statusSelect && statusSelect.value === "released";
+      if (!title || !summary) return;
+
+      var custom = [];
+      try { custom = JSON.parse(localStorage.getItem(STORAGE_CUSTOM_GAMES) || "[]") || []; } catch (err) { custom = []; }
+      var newItem = {
+        id: "custom-" + Date.now(),
+        title: title,
+        badge: isReleased ? "Activo · Build in Public" : "Próximamente",
+        stage: isReleased ? "Publicado / Prototipo" : "Próximo Juego",
+        summary: summary,
+        tags: ["Indie", "Build in Public"],
+        ctaHref: "#juegos",
+        ctaLabel: "Ver en catálogo",
+        released: isReleased
+      };
+      custom.push(newItem);
+      try { localStorage.setItem(STORAGE_CUSTOM_GAMES, JSON.stringify(custom)); } catch (err) {}
+      saveGameReleased(newItem.id, isReleased);
+
+      if (titleInput) titleInput.value = "";
+      if (summaryInput) summaryInput.value = "";
+      renderGamesSections();
+      pushActivity("Nuevo proyecto '" + title + "' agregado (" + (isReleased ? "Juegos" : "Próximos Juegos") + ").");
+    });
+  }
+
+  var resetBtn = document.getElementById("reset-dynamic-btn");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", function () {
+      try {
+        localStorage.removeItem(STORAGE_GAMES_KEY);
+        localStorage.removeItem(STORAGE_CUSTOM_GAMES);
+        localStorage.removeItem(STORAGE_EDITS_KEY);
+      } catch (err) {}
+      renderGamesSections();
+      pushActivity("Catálogo restablecido a los proyectos iniciales.");
+    });
+  }
+
+  // Estadísticas de visitas y comunidad por red (sumar y restar)
+  function loadStatsState() {
+    var base = {
+      pageViews: Number(INITIAL_STATS.pageViews) || 0,
+      uniqueSessions: Number(INITIAL_STATS.uniqueSessions) || 0,
+      members: {}
+    };
+    (INITIAL_STATS.networks || []).forEach(function (net) {
+      base.members[net.id] = Number(net.members) || 0;
+    });
+
+    try {
+      var raw = JSON.parse(localStorage.getItem(STORAGE_STATS_KEY) || "null");
+      if (raw && typeof raw === "object") {
+        if (typeof raw.pageViews === "number") base.pageViews = raw.pageViews;
+        if (typeof raw.uniqueSessions === "number") base.uniqueSessions = raw.uniqueSessions;
+        if (raw.members && typeof raw.members === "object") {
+          Object.keys(raw.members).forEach(function (k) {
+            if (Object.prototype.hasOwnProperty.call(base.members, k) && typeof raw.members[k] === "number") {
+              base.members[k] = Math.max(0, raw.members[k]);
+            }
+          });
+        }
+      }
+    } catch (e) {}
+
+    base.pageViews += 1;
+    var countedSession = false;
+    try { countedSession = Boolean(sessionStorage.getItem(STORAGE_SESSION_KEY)); } catch (e) {}
+    if (!countedSession) {
+      base.uniqueSessions += 1;
+      try { sessionStorage.setItem(STORAGE_SESSION_KEY, "1"); } catch (e) {}
+    }
+
+    try { localStorage.setItem(STORAGE_STATS_KEY, JSON.stringify(base)); } catch (e) {}
+    return base;
+  }
+
+  var statsState = loadStatsState();
+
+  function persistStats() {
+    try { localStorage.setItem(STORAGE_STATS_KEY, JSON.stringify(statsState)); } catch (e) {}
+  }
+
+  function renderStats() {
+    var grid = document.getElementById("stats-grid");
+    var legend = document.getElementById("stats-legend");
+    if (!grid) return;
+    grid.replaceChildren();
+
+    var totalCommunity = 0;
+    (INITIAL_STATS.networks || []).forEach(function (net) {
+      totalCommunity += Math.max(0, Number(statsState.members[net.id] || 0));
+    });
+
+    var viewsCard = document.createElement("div");
+    viewsCard.className = "stat-card highlight";
+    viewsCard.innerHTML =
+      '<span class="stat-label">Vistas de la página</span>' +
+      '<span class="stat-value">' + statsState.pageViews.toLocaleString("es-AR") + '</span>' +
+      '<span class="stat-sub">Sesiones registradas: ' + statsState.uniqueSessions.toLocaleString("es-AR") + '</span>';
+    grid.appendChild(viewsCard);
+
+    var totalCard = document.createElement("div");
+    totalCard.className = "stat-card";
+    totalCard.innerHTML =
+      '<span class="stat-label">Comunidad total (redes)</span>' +
+      '<span class="stat-value">' + totalCommunity.toLocaleString("es-AR") + '</span>' +
+      '<span class="stat-sub">Suma de miembros en redes configuradas</span>';
+    grid.appendChild(totalCard);
+
+    (INITIAL_STATS.networks || []).forEach(function (net) {
+      var count = Math.max(0, Number(statsState.members[net.id] || 0));
+      var card = document.createElement("div");
+      card.className = "stat-card";
+
+      var lbl = document.createElement("span");
+      lbl.className = "stat-label";
+      lbl.textContent = net.name;
+
+      var val = document.createElement("span");
+      val.className = "stat-value";
+      val.textContent = count.toLocaleString("es-AR");
+
+      var sub = document.createElement("span");
+      sub.className = "stat-sub";
+      sub.textContent = net.note || "Miembros en la comunidad";
+
+      var actions = document.createElement("div");
+      actions.className = "stat-actions";
+
+      var addBtn = document.createElement("button");
+      addBtn.type = "button";
+      addBtn.className = "btn alt sm";
+      addBtn.textContent = "+1 Sumar";
+      addBtn.addEventListener("click", function () {
+        statsState.members[net.id] = Math.max(0, Number(statsState.members[net.id] || 0)) + 1;
+        persistStats();
+        renderStats();
+        pushActivity("Comunidad " + net.name + ": +1 persona.");
+      });
+
+      var subBtn = document.createElement("button");
+      subBtn.type = "button";
+      subBtn.className = "btn sm";
+      subBtn.textContent = "-1 Restar";
+      subBtn.disabled = count <= 0;
+      subBtn.addEventListener("click", function () {
+        var current = Math.max(0, Number(statsState.members[net.id] || 0));
+        statsState.members[net.id] = Math.max(0, current - 1);
+        persistStats();
+        renderStats();
+        pushActivity("Comunidad " + net.name + ": -1 persona.");
+      });
+
+      var link = document.createElement("a");
+      link.className = "btn violet sm";
+      link.href = net.url || "#comunidad";
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Ir a " + net.name;
+      link.addEventListener("click", function () {
+        statsState.members[net.id] = Math.max(0, Number(statsState.members[net.id] || 0)) + 1;
+        persistStats();
+        renderStats();
+      });
+
+      actions.appendChild(addBtn);
+      actions.appendChild(subBtn);
+      actions.appendChild(link);
+
+      card.appendChild(lbl);
+      card.appendChild(val);
+      card.appendChild(sub);
+      card.appendChild(actions);
+      grid.appendChild(card);
+    });
+
+    if (legend) {
+      legend.textContent = "Podés sumar (+1) o restar (-1) personas en cada red sin bajar de 0; las métricas locales se guardan en este navegador.";
+    }
+  }
+
+  renderStats();
+
+  // Panel modificable del estudio y enlaces
+  function loadStudioConfig() {
+    var def = {
+      studioName: STUDIO_NAME,
+      exeUrl: EXE_URL,
+      discordUrl: DISCORD_URL,
+      instagramUrl: INSTAGRAM_URL,
+      youtubeUrl: YOUTUBE_URL,
+      itchUrl: ITCH_URL,
+      email: EMAIL,
+      mpUrl: MP_URL
+    };
+    try {
+      var saved = JSON.parse(localStorage.getItem(STORAGE_CONFIG_KEY) || "null");
+      if (saved && typeof saved === "object") {
+        Object.keys(def).forEach(function (k) {
+          if (typeof saved[k] === "string") def[k] = saved[k];
+        });
+      }
+    } catch (e) {}
+    return def;
+  }
+
+  var activeCfg = loadStudioConfig();
+
+  function applyStudioConfig(cfg) {
+    document.title = cfg.studioName + " | NEXUS PARKOUR";
+    document.querySelectorAll("footer strong").forEach(function (el) {
+      el.textContent = cfg.studioName;
+    });
+    document.querySelectorAll("[data-exe-download]").forEach(function (a) {
+      if (cfg.exeUrl) a.href = cfg.exeUrl;
+    });
+    document.querySelectorAll("[data-discord]").forEach(function (a) { a.href = cfg.discordUrl || "#"; });
+    document.querySelectorAll("[data-instagram]").forEach(function (a) { a.href = cfg.instagramUrl || "#"; });
+    document.querySelectorAll("#itch-btn, #itch-foot").forEach(function (a) {
+      if (cfg.itchUrl) a.href = cfg.itchUrl;
+    });
+    var mpLink = document.getElementById("mp-link");
+    if (mpLink && cfg.mpUrl) mpLink.href = cfg.mpUrl;
+    document.querySelectorAll("[data-mail]").forEach(function (a) {
+      a.href = "mailto:" + cfg.email;
+      a.textContent = cfg.email;
+    });
+  }
+
+  function hydrateConfigForm() {
+    var map = {
+      "cfg-studio-name": activeCfg.studioName,
+      "cfg-exe-url": activeCfg.exeUrl,
+      "cfg-discord-url": activeCfg.discordUrl,
+      "cfg-instagram-url": activeCfg.instagramUrl,
+      "cfg-youtube-url": activeCfg.youtubeUrl,
+      "cfg-itch-url": activeCfg.itchUrl,
+      "cfg-email": activeCfg.email,
+      "cfg-mp-url": activeCfg.mpUrl
+    };
+    Object.keys(map).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.value = map[id] || "";
+    });
+  }
+
+  applyStudioConfig(activeCfg);
+  hydrateConfigForm();
+
+  var cfgForm = document.getElementById("studio-config-form");
+  if (cfgForm) {
+    cfgForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      activeCfg = {
+        studioName: (document.getElementById("cfg-studio-name").value || "").trim() || STUDIO_NAME,
+        exeUrl: (document.getElementById("cfg-exe-url").value || "").trim(),
+        discordUrl: (document.getElementById("cfg-discord-url").value || "").trim(),
+        instagramUrl: (document.getElementById("cfg-instagram-url").value || "").trim(),
+        youtubeUrl: (document.getElementById("cfg-youtube-url").value || "").trim(),
+        itchUrl: (document.getElementById("cfg-itch-url").value || "").trim(),
+        email: (document.getElementById("cfg-email").value || "").trim() || EMAIL,
+        mpUrl: (document.getElementById("cfg-mp-url").value || "").trim()
+      };
+      try { localStorage.setItem(STORAGE_CONFIG_KEY, JSON.stringify(activeCfg)); } catch (err) {}
+      applyStudioConfig(activeCfg);
+      pushActivity("Configuración del estudio guardada.");
+    });
+  }
+
+  var exportBtn = document.getElementById("export-state-btn");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", function () {
+      var payload = JSON.stringify({
+        config: activeCfg,
+        games: loadGamesState(),
+        stats: statsState
+      }, null, 2);
+      var blob = new Blob([payload], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "nexus-game-studio-data.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      pushActivity("Datos exportados a JSON.");
+    });
+  }
+
+  var resetAllBtn = document.getElementById("reset-all-btn");
+  if (resetAllBtn) {
+    resetAllBtn.addEventListener("click", function () {
+      try {
+        localStorage.removeItem(STORAGE_GAMES_KEY);
+        localStorage.removeItem(STORAGE_CUSTOM_GAMES);
+        localStorage.removeItem(STORAGE_STATS_KEY);
+        localStorage.removeItem(STORAGE_CONFIG_KEY);
+        localStorage.removeItem(STORAGE_EDITS_KEY);
+      } catch (err) {}
+      location.reload();
+    });
+  }
+
+  // Formulario especial para visitantes (sugerencias de videojuegos y afines)
+  var surveyForm = document.getElementById("player-survey-form");
+  var surveyStatus = document.getElementById("sv-status");
+  var responsesWrap = document.getElementById("sv-responses-wrap");
+  var responsesList = document.getElementById("sv-responses-list");
+
+  function loadSurveyResponses() {
+    try {
+      var list = JSON.parse(localStorage.getItem(STORAGE_SURVEY_KEY) || "[]");
+      return Array.isArray(list) ? list : [];
+    } catch (e) { return []; }
+  }
+
+  function saveSurveyResponses(list) {
+    try { localStorage.setItem(STORAGE_SURVEY_KEY, JSON.stringify(list)); } catch (e) {}
+  }
+
+  function renderSurveyResponses() {
+    if (!responsesWrap || !responsesList) return;
+    var list = loadSurveyResponses();
+    responsesList.replaceChildren();
+    if (!list.length) {
+      responsesWrap.hidden = true;
+      return;
+    }
+    responsesWrap.hidden = false;
+    list.slice().reverse().forEach(function (item) {
+      var box = document.createElement("article");
+      box.className = "response-item";
+
+      var head = document.createElement("div");
+      head.className = "response-head";
+      var who = document.createElement("strong");
+      who.textContent = item.nick || "Visitante";
+      var tag = document.createElement("span");
+      tag.className = "response-tag";
+      tag.textContent = item.genre || "Videojuegos";
+      head.appendChild(who);
+      head.appendChild(tag);
+
+      var body = document.createElement("p");
+      body.className = "response-body";
+      body.textContent = item.idea;
+
+      var meta = document.createElement("p");
+      meta.className = "response-meta";
+      var extrasTxt = (item.extras && item.extras.length) ? " · Extras: " + item.extras.join(", ") : "";
+      meta.textContent = "Prioridad: " + (item.priority || "-") + extrasTxt;
+
+      box.appendChild(head);
+      box.appendChild(body);
+      box.appendChild(meta);
+      responsesList.appendChild(box);
+    });
+  }
+
+  renderSurveyResponses();
+
+  if (surveyForm) {
+    surveyForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var nickVal = (document.getElementById("sv-nick").value || "").trim() || "Visitante";
+      var genreVal = document.getElementById("sv-genre").value;
+      var priorityVal = document.getElementById("sv-priority").value;
+      var ideaVal = (document.getElementById("sv-idea").value || "").trim();
+      if (!ideaVal) return;
+
+      var checkedExtras = [];
+      document.querySelectorAll("#sv-extras input[type='checkbox']:checked").forEach(function (cb) {
+        checkedExtras.push(cb.value);
+      });
+
+      var current = loadSurveyResponses();
+      current.push({
+        nick: nickVal,
+        genre: genreVal,
+        priority: priorityVal,
+        extras: checkedExtras,
+        idea: ideaVal,
+        date: new Date().toISOString().slice(0, 10)
+      });
+      saveSurveyResponses(current);
+      renderSurveyResponses();
+      surveyForm.reset();
+      if (surveyStatus) {
+        surveyStatus.textContent = "Gracias por tu sugerencia. Quedó guardada en el registro local de este navegador.";
+      }
+      pushActivity("Nueva sugerencia registrada de '" + nickVal + "' (" + genreVal + ").");
+    });
+  }
+
+  var copySurveyBtn = document.getElementById("sv-copy-btn");
+  if (copySurveyBtn) {
+    copySurveyBtn.addEventListener("click", function () {
+      var list = loadSurveyResponses();
+      if (!list.length) {
+        if (surveyStatus) surveyStatus.textContent = "No hay sugerencias guardadas todavía.";
+        return;
+      }
+      var formatted = list.map(function (r, idx) {
+        return (idx + 1) + ". [" + r.nick + "] Estilo: " + r.genre + " | Prioridad: " + r.priority +
+          (r.extras && r.extras.length ? " | Extras: " + r.extras.join(", ") : "") +
+          "\n   Idea: " + r.idea;
+      }).join("\n\n");
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(formatted).then(function () {
+          if (surveyStatus) surveyStatus.textContent = "Sugerencias copiadas al portapapeles.";
+        });
+      }
+    });
+  }
+
+  var clearSurveyBtn = document.getElementById("sv-clear-btn");
+  if (clearSurveyBtn) {
+    clearSurveyBtn.addEventListener("click", function () {
+      try { localStorage.removeItem(STORAGE_SURVEY_KEY); } catch (e) {}
+      renderSurveyResponses();
+      if (surveyStatus) surveyStatus.textContent = "Respuestas locales borradas.";
+    });
+  }
+
+  // Descarga directa de NEXUSPARCUKOR.exe
+  var feedbackEl = document.getElementById("dl-feedback");
+  function setDlFeedback(msg) {
+    if (feedbackEl) feedbackEl.textContent = msg;
+  }
+
+  document.querySelectorAll("[data-exe-download]").forEach(function (link) {
+    if (!EXE_URL) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        setDlFeedback("Configura la ruta o URL de " + EXE_FILENAME + " en EXE_URL.");
+      });
+      return;
+    }
+
+    link.href = EXE_URL;
+    link.setAttribute("download", EXE_FILENAME);
+
+    var isExternal = /^https?:\/\//i.test(EXE_URL) && EXE_URL.indexOf(location.origin) !== 0;
+    if (isExternal) {
+      link.removeAttribute("download");
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.addEventListener("click", function () {
+        setDlFeedback("Iniciando descarga de " + EXE_FILENAME + "...");
+      });
+      return;
+    }
+
+    link.addEventListener("click", function (e) {
+      if (location.protocol === "file:") {
+        setDlFeedback("Descargando " + EXE_FILENAME + "...");
+        return;
+      }
+      e.preventDefault();
+      setDlFeedback("Preparando descarga de " + EXE_FILENAME + "...");
+      fetch(EXE_URL, { method: "HEAD" }).then(function (res) {
+        var contentType = (res.headers.get("content-type") || "").toLowerCase();
+        if (!res.ok || contentType.indexOf("text/html") !== -1) {
+          throw new Error("Archivo no encontrado en el servidor");
+        }
+        var temp = document.createElement("a");
+        temp.href = EXE_URL;
+        temp.download = EXE_FILENAME;
+        temp.style.display = "none";
+        document.body.appendChild(temp);
+        temp.click();
+        document.body.removeChild(temp);
+        setDlFeedback("Descarga iniciada: " + EXE_FILENAME);
+      }).catch(function () {
+        setDlFeedback("No se encontró " + EXE_FILENAME + " en la carpeta del sitio. Súbelo junto a index.html o coloca su URL directa en EXE_URL.");
+      });
+    });
+  });
+
+  // itch.io
+  document.querySelectorAll("#itch-btn, #itch-foot").forEach(function (a) {
+    if (ITCH_URL) { a.href = ITCH_URL; }
+    else {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        alert("La descarga en itch.io estará disponible muy pronto. ¡Sigue el canal de YouTube!");
+      });
+    }
+  });
+
+  // Video de YouTube
+  if (VIDEO_ID) {
+    if (VIDEO_VERTICAL) document.getElementById("video-box").classList.add("vertical");
+    var box = document.getElementById("video-box");
+    var shortUrl = "https://www.youtube.com/shorts/" + encodeURIComponent(VIDEO_ID);
+    if (location.protocol === "file:") {
+      var a = document.createElement("a");
+      a.className = "thumb";
+      a.href = shortUrl; a.target = "_blank"; a.rel = "noopener";
+      a.setAttribute("aria-label", "Ver el video en YouTube");
+      var img = document.createElement("img");
+      img.alt = "Miniatura de NEXUS PARKOUR";
+      img.src = "https://img.youtube.com/vi/" + encodeURIComponent(VIDEO_ID) + "/maxresdefault.jpg";
+      img.addEventListener("error", function () {
+        if (!img.dataset.fallback) {
+          img.dataset.fallback = "1";
+          img.src = "https://img.youtube.com/vi/" + encodeURIComponent(VIDEO_ID) + "/hqdefault.jpg";
+        }
+      });
+      var play = document.createElement("span");
+      play.className = "play";
+      a.appendChild(img);
+      a.appendChild(play);
+      box.replaceChildren(a);
+    } else {
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube.com/embed/" + encodeURIComponent(VIDEO_ID) + "?rel=0&playsinline=1";
+      f.title = "NEXUS PARKOUR en YouTube";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      f.allowFullscreen = true;
+      f.loading = "lazy";
+      box.replaceChildren(f);
+    }
+  }
+
+  // Mercado Pago opcional
+  if (MP_ENABLED) {
+    document.getElementById("apoyar").hidden = false;
+    document.getElementById("mp-foot-link").hidden = false;
+    var navMpLink = document.getElementById("nav-mp-link");
+    if (navMpLink) navMpLink.hidden = false;
+    var mpBtn = document.getElementById("mp-link");
+    if (MP_URL) {
+      mpBtn.href = MP_URL;
+    } else {
+      mpBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        alert("Configura tu Link de Pago de Mercado Pago en la constante MP_URL del código HTML (ej. https://mpago.la/...).");
+      });
+    }
+  }
+
+  // Enlaces sociales y correo
+  document.querySelectorAll("[data-discord]").forEach(function (a) { a.href = DISCORD_URL; });
+  document.querySelectorAll("[data-instagram]").forEach(function (a) { a.href = INSTAGRAM_URL; });
+  document.querySelectorAll("[data-mail]").forEach(function (a) {
+    a.href = "mailto:" + EMAIL;
+    a.textContent = EMAIL;
+  });
+
+  // Botón copiar correo
+  document.querySelectorAll("[data-copy-mail]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var statusEl = btn.parentElement.querySelector(".copy-status");
+      function showFeedback(msg) {
+        if (statusEl) {
+          statusEl.textContent = msg;
+          clearTimeout(statusEl._timer);
+          statusEl._timer = setTimeout(function () { statusEl.textContent = ""; }, 2500);
+        }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(EMAIL).then(function () {
+          showFeedback("Copiado");
+        }).catch(function () {
+          showFeedback(EMAIL);
+        });
+      } else {
+        showFeedback(EMAIL);
+      }
+    });
+  });
+
+  // Animación de partículas en portada
+  (function initHeroMotion() {
+    var canvas = document.getElementById("hero-canvas");
+    if (!canvas) return;
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    var ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    var w = 0, h = 0;
+    var pointer = { x: -9999, y: -9999 };
+    var nodes = [];
+
+    function resize() {
+      var rect = canvas.parentElement.getBoundingClientRect();
+      w = canvas.width = Math.max(1, Math.floor(rect.width));
+      h = canvas.height = Math.max(1, Math.floor(rect.height));
+    }
+
+    function seed() {
+      nodes = [];
+      var count = Math.min(36, Math.max(14, Math.floor((w * h) / 36000)));
+      for (var i = 0; i < count; i++) {
+        nodes.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.75,
+          vy: (Math.random() - 0.5) * 0.75,
+          r: 1.5 + Math.random() * 2,
+          c: i % 2 === 0 ? "rgba(37,244,238,0.65)" : "rgba(255,45,149,0.55)"
+        });
+      }
+    }
+
+    window.addEventListener("resize", function () { resize(); seed(); });
+    window.addEventListener("pointermove", function (e) {
+      var r = canvas.getBoundingClientRect();
+      pointer.x = e.clientX - r.left;
+      pointer.y = e.clientY - r.top;
+    }, { passive: true });
+
+    resize();
+    seed();
+
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < nodes.length; i++) {
+        var a = nodes[i];
+        var dxp = pointer.x - a.x;
+        var dyp = pointer.y - a.y;
+        var distP = Math.hypot(dxp, dyp);
+        if (distP > 0 && distP < 150) {
+          a.x -= (dxp / distP) * 0.6;
+          a.y -= (dyp / distP) * 0.6;
+        }
+        a.x += a.vx;
+        a.y += a.vy;
+        if (a.x < 0) a.x = w;
+        if (a.x > w) a.x = 0;
+        if (a.y < 0) a.y = h;
+        if (a.y > h) a.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+        ctx.fillStyle = a.c;
+        ctx.fill();
+
+        for (var j = i + 1; j < nodes.length; j++) {
+          var b = nodes[j];
+          var d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 115) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = "rgba(122,92,255," + (0.22 * (1 - d / 115)).toFixed(3) + ")";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
